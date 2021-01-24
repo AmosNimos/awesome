@@ -49,7 +49,7 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
+beautiful.init(gears.filesystem.get_configuration_dir() .. "themes/mytheme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "x-terminal-emulator"
@@ -167,24 +167,44 @@ local tasklist_buttons = gears.table.join(
                                               awful.client.focus.byidx(-1)
                                           end))
 
-local function set_wallpaper(s)
+
+--local function set_wallpaper(s)
+    --[[
     -- Wallpaper
-    if beautiful.wallpaper then
-        local wallpaper = beautiful.wallpaper
+--    if beautiful.wallpaper then
+--        local wallpaper = beautiful.wallpaper
         -- If wallpaper is a function, call it with the screen
-        if type(wallpaper) == "function" then
-            wallpaper = wallpaper(s)
-        end
-        gears.wallpaper.maximized(wallpaper, s, true)
-    end
-end
+--        if type(wallpaper) == "function" then
+--            wallpaper = wallpaper(s)
+--        end
+--        gears.wallpaper.maximized(wallpaper, s, true)
+--    end
+    ]]--
+--end
+
+-- hide to bar (in theory)
+--statusbar_visibility = {}
+
+--function updateStatusBarVisibility()
+--local tag = awful.tag.selected()
+--if not tag then return end
+--mywibox[mouse.screen].visible = not statusbar_visibility[tag]
+--end
+
+--function toggleStatusBarVisibility()
+--local tag = awful.tag.selected()
+--if not tag then return end
+--statusbar_visibility[tag] = not statusbar_visibility[tag]
+--updateStatusBarVisibility()
+--end
+--tag.connect_signal("property::selected", updateStatusBarVisibility)
 
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
-screen.connect_signal("property::geometry", set_wallpaper)
+--screen.connect_signal("property::geometry", set_wallpaper)
 
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
-    set_wallpaper(s)
+    --set_wallpaper(s)
 
     -- Each screen has its own tag table.
     awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
@@ -214,9 +234,10 @@ awful.screen.connect_for_each_screen(function(s)
     }
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s })
+    --s.mywibox = awful.wibar({ position = "top", screen = s })
 
     -- Add widgets to the wibox
+    --[[
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
@@ -234,6 +255,7 @@ awful.screen.connect_for_each_screen(function(s)
             s.mylayoutbox,
         },
     }
+    ]]--
 end)
 -- }}}
 
@@ -343,7 +365,9 @@ globalkeys = gears.table.join(
               end,
               {description = "lua execute prompt", group = "awesome"}),
     -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end,
+    --awful.key({ modkey }, "p", function() menubar.show() end,
+              --{description = "show the menubar", group = "launcher"})
+     awful.key({ modkey }, "p", function() toggleStatusBarVisibility() end,
               {description = "show the menubar", group = "launcher"})
 )
 
@@ -580,12 +604,15 @@ end)
 --    c:emit_signal("request::activate", "mouse_enter", {raise = false})
 --end)
 
-client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
-client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+--client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
+--client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
 --Autostart Applications
-awful.spawn.with_shell("compton")
+awful.spawn.with_shell("picom --experimental-backends --backend glx")
 --awful.spawn.with_shell("nitrogen --set-zoom-fill --random ~/Pictures/Wallpapers")
-awful.spawn.with_shell("nitrogen --set-zoom-fill --restore")
-beautiful.useless_gap = 0
+--awful.spawn.with_shell("nitrogen --restore")
+--awful.spawn.with_shell("feh --bg-fill ~/Pictures/Wallpapers/wallpaperName.type")
+
+--change gap with theme.lua instead
+--beautiful.useless_gap = 35
