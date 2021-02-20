@@ -69,14 +69,14 @@ awful.layout.layouts = {
     awful.layout.suit.fair,
     awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max.fullscreen,
-    awful.layout.suit.spiral,
-    awful.layout.suit.max,
-    awful.layout.suit.magnifier,
-    awful.layout.suit.corner.nw,
-    awful.layout.suit.tile.left,
-    awful.layout.suit.tile.bottom,
-    awful.layout.suit.tile.top,
-    awful.layout.suit.fair.horizontal,
+    --awful.layout.suit.tile.left,
+    --awful.layout.suit.max,
+    --awful.layout.suit.spiral,
+    --awful.layout.suit.magnifier,
+    --awful.layout.suit.corner.nw,
+    --awful.layout.suit.tile.bottom,
+    --awful.layout.suit.tile.top,
+    --awful.layout.suit.fair.horizontal,
     -- awful.layout.suit.floating,
     -- awful.layout.suit.corner.ne,
     -- awful.layout.suit.corner.sw,
@@ -318,18 +318,23 @@ globalkeys = gears.table.join(
               {description = "select previous", group = "layout"}),
 
     --my keys
-     awful.key({ "Control", "Shift"   }, "w", function () awful.util.spawn("firefox")                end,
+     awful.key({ "Control", "Shift"   }, "w", function () awful.util.spawn("firefox") end,
               {description = "firefox", group = "applications"}),
-     awful.key({ "Control", "Shift"   }, "f", function () awful.util.spawn("nautilus")                end,
+     awful.key({ "Control", "Shift"   }, "f", function () awful.util.spawn("nautilus") end,
               {description = "nautilus", group = "applications"}),
-     awful.key({ "Control", "Shift"   }, "s", function () awful.util.spawn("subl")                end,
+     awful.key({ "Control", "Shift"   }, "s", function () awful.util.spawn("subl") end,
               {description = "sublime", group = "applications"}),
-     awful.key({ "Control", "Mod1"   }, "s", function () awful.spawn.with_shell("python3 /home/l/Documents/global/web/animekisa.py -e")              end,
+     awful.key({ "Control", "Mod1"   }, "s", function () awful.spawn.with_shell("python3 /home/l/Documents/global/web/animekisa.py -e") end,
               {description = "anime streaming", group = "shell"}),
-     awful.key({ "Control", "Mod1"   }, "d", function () awful.spawn.with_shell("python3 /home/l/Documents/global/web/animekisa.py -p -e -d")              end,
+     awful.key({ "Control", "Mod1"   }, "d", function () awful.spawn.with_shell("python3 /home/l/Documents/global/web/animekisa.py -p -e -d") end,
               {description = "anime download", group = "shell"}),
-     awful.key({ "Control", "Mod1"   }, "z", function () awful.spawn.with_shell("~/Documents/global/bash-script/auto-fill")              end,
+     awful.key({ "Control", "Mod1"   }, "z", function () awful.spawn.with_shell("~/Documents/global/bash-script/auto-fill") end,
               {description = "word autofill", group = "shell"}),
+     awful.key({ "Control", "Mod1"   }, "m", function () awful.spawn.with_shell("dmenu_run") end,
+              {description = "word autofill", group = "shell"}),
+     awful.key({ "Control", "Mod1"   }, "m", function () awful.spawn.with_shell("rofi -show drun") end,
+              {description = "word autofill", group = "shell"}),
+     
 
     awful.key({ modkey, "Control" }, "n",
               function ()
@@ -442,6 +447,34 @@ for i = 1, 9 do
                      end
                   end,
                   {description = "move focused client to tag #"..i, group = "tag"}),
+
+		awful.key({ modkey, "Mod1" }, "Left",
+		    function ()
+		        -- get current tag
+		        local t = client.focus and client.focus.first_tag or nil
+		        if t == nil then
+		            return
+		        end
+		        -- get previous tag (modulo 9 excluding 0 to wrap from 1 to 9)
+		        local tag = client.focus.screen.tags[(t.name - 2) % 9 + 1]
+		        awful.client.movetotag(tag)
+		        awful.tag.viewprev()
+		    end,
+		        {description = "move client to previous tag and switch to it", group = "layout"}),
+		awful.key({ modkey, "Mod1" }, "Right",
+		    function ()
+		        -- get current tag
+		        local t = client.focus and client.focus.first_tag or nil
+		        if t == nil then
+		            return
+		        end
+		        -- get next tag (modulo 9 excluding 0 to wrap from 9 to 1)
+		        local tag = client.focus.screen.tags[(t.name % 9) + 1]
+		        awful.client.movetotag(tag)
+		        awful.tag.viewnext()
+		    end,
+		        {description = "move client to next tag and switch to it", group = "layout"}),
+
         -- Toggle tag on focused client.
         awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
                   function ()
@@ -491,7 +524,7 @@ awful.rules.rules = {
                      size_hints_honor = false,
      },
      { rule = { class = "xfce4-terminal" },
-        properties = { opacity = 0.75 } },
+        properties = { opacity = 0.50 } },
     },
 
     -- Floating clients.
@@ -603,6 +636,6 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- }}}
 
 awful.util.spawn("compton")
-client.connect_signal("focus", function(c) c.border_color = "#ffc400" end)
+--client.connect_signal("focus", function(c) c.border_color = "ff9a00" end)
 --awful.spawn.with_shell("picom --experimental-backends --backend glx")
 --awful.spawn.with_shell("feh --bg-fill ~/Pictures/web_images/img_06.png")
