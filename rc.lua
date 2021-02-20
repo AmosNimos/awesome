@@ -483,8 +483,7 @@ awful.rules.rules = {
     { rule = { },
       properties = { border_width = beautiful.border_width,
                      border_color = beautiful.border_normal,
-                     focus = awful.client.focus.filter,
-                     raise = true,
+                     --focus = awful.client.focus.filter, raise = false,
                      keys = clientkeys,
                      buttons = clientbuttons,
                      screen = awful.screen.preferred,
@@ -592,6 +591,7 @@ client.connect_signal("request::titlebars", function(c)
         layout = wibox.layout.align.horizontal
     }
 end)
+--]]
 
 -- Enable sloppy focus, so that focus follows mouse.
 client.connect_signal("mouse::enter", function(c)
@@ -601,7 +601,8 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
---]]
+
 awful.util.spawn("compton")
+client.connect_signal("focus", function(c) c.border_color = "#ffc400" end)
 --awful.spawn.with_shell("picom --experimental-backends --backend glx")
 --awful.spawn.with_shell("feh --bg-fill ~/Pictures/web_images/img_06.png")
