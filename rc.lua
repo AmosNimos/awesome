@@ -1,5 +1,8 @@
+--setxkbmap -option caps:swapescape
+
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
+
 pcall(require, "luarocks.loader")
 
 -- Standard awesome library
@@ -125,7 +128,6 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock()
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -301,7 +303,7 @@ globalkeys = gears.table.join(
               {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
-    awful.key({ modkey, "Control"   }, "q", function () awful.spawn.with_shell("~/Documents/global/bash-script/prompt 'are you sure?' '/usr/sbin/shutdown -h now'") end,
+    awful.key({ "Escape"          },"a", function () awful.spawn.with_shell("~/Documents/global/bash-script/prompt 'are you sure?' '/usr/sbin/shutdown -h now'") end,
               {description = "quit awesome", group = "awesome"}),
 
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
@@ -342,6 +344,7 @@ globalkeys = gears.table.join(
               {description = "rofi", group = "shell"}),
      awful.key({ "Control", "Mod1"   }, "t", function () awful.spawn.with_shell("date +%R | dmenu") end,
               {description = "show time", group = "shell"}),
+
      
 
     awful.key({ modkey, "Control" }, "n",
