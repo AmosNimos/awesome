@@ -269,8 +269,10 @@ globalkeys = gears.table.join(
         end,
         {description = "focus previous by index", group = "client"}
     ),
+    --[[
     awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
               {description = "show main menu", group = "awesome"}),
+    ]]--
 
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end,
@@ -299,6 +301,8 @@ globalkeys = gears.table.join(
               {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
+    awful.key({ modkey, "Control"   }, "q", function () awful.spawn.with_shell("~/Documents/global/bash-script/prompt 'are you sure?' '/usr/sbin/shutdown -h now'") end,
+              {description = "quit awesome", group = "awesome"}),
 
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
               {description = "increase master width factor", group = "layout"}),
@@ -324,16 +328,20 @@ globalkeys = gears.table.join(
               {description = "nautilus", group = "applications"}),
      awful.key({ "Control", "Shift"   }, "s", function () awful.util.spawn("subl") end,
               {description = "sublime", group = "applications"}),
-     awful.key({ "Control", "Mod1"   }, "s", function () awful.spawn.with_shell("python3 /home/l/Documents/global/web/animekisa.py -e") end,
+     awful.key({ "Control", "Mod1"   }, "s", function () awful.spawn.with_shell("python3 /home/l/Documents/global/web/anime/animekisa.py -e") end,
               {description = "anime streaming", group = "shell"}),
-     awful.key({ "Control", "Mod1"   }, "d", function () awful.spawn.with_shell("python3 /home/l/Documents/global/web/animekisa.py -p -e -d") end,
+     awful.key({ "Control", "Mod1"   }, "d", function () awful.spawn.with_shell("python3 /home/l/Documents/global/web/anime/animekisa.py -p -e -d") end,
               {description = "anime download", group = "shell"}),
      awful.key({ "Control", "Mod1"   }, "z", function () awful.spawn.with_shell("~/Documents/global/bash-script/auto-fill") end,
               {description = "word autofill", group = "shell"}),
+     awful.key({ "Control", "Mod1"   }, "v", function () awful.spawn.with_shell("~/Documents/global/bash-script/volume-change") end,
+              {description = "volume-change", group = "shell"}),
      awful.key({ "Control", "Mod1"   }, "m", function () awful.spawn.with_shell("dmenu_run") end,
-              {description = "word autofill", group = "shell"}),
-     awful.key({ "Control", "Mod1"   }, "m", function () awful.spawn.with_shell("rofi -show drun") end,
-              {description = "word autofill", group = "shell"}),
+              {description = "dmenu", group = "shell"}),
+     awful.key({ "Control", "Mod1"   }, "a", function () awful.spawn.with_shell("rofi -show drun") end,
+              {description = "rofi", group = "shell"}),
+     awful.key({ "Control", "Mod1"   }, "t", function () awful.spawn.with_shell("date +%R | dmenu") end,
+              {description = "show time", group = "shell"}),
      
 
     awful.key({ modkey, "Control" }, "n",
@@ -376,6 +384,7 @@ clientkeys = gears.table.join(
         {description = "toggle fullscreen", group = "client"}),
     awful.key({ "Control", "Shift"   }, "q",      function (c) c:kill()                         end,
               {description = "close", group = "client"}),
+
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ,
               {description = "toggle floating", group = "client"}),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
@@ -516,7 +525,8 @@ awful.rules.rules = {
     { rule = { },
       properties = { border_width = beautiful.border_width,
                      border_color = beautiful.border_normal,
-                     --focus = awful.client.focus.filter, raise = false,
+                     focus = awful.client.focus.filter, 
+                     raise = True,
                      keys = clientkeys,
                      buttons = clientbuttons,
                      screen = awful.screen.preferred,
@@ -524,7 +534,7 @@ awful.rules.rules = {
                      size_hints_honor = false,
      },
      { rule = { class = "xfce4-terminal" },
-        properties = { opacity = 0.50 } },
+        properties = { opacity = 0.95 } },
     },
 
     -- Floating clients.
