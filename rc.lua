@@ -303,7 +303,7 @@ globalkeys = gears.table.join(
               {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
-    awful.key({ "Escape"          },"a", function () awful.spawn.with_shell("~/Documents/global/bash-script/prompt 'are you sure?' '/usr/sbin/shutdown -h now'") end,
+    awful.key({ "Control","Shift",},"a", function () awful.spawn.with_shell("~/Documents/global/bash-script/prompt 'are you sure?' '/usr/sbin/shutdown -h now'") end,
               {description = "quit awesome", group = "awesome"}),
 
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
