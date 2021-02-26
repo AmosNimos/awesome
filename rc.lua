@@ -1,4 +1,4 @@
---setxkbmap -option caps:swapescape
+--
 
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
@@ -303,7 +303,7 @@ globalkeys = gears.table.join(
               {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
-    awful.key({ "Control","Shift",},"a", function () awful.spawn.with_shell("~/Documents/global/bash-script/prompt 'are you sure?' '/usr/sbin/shutdown -h now'") end,
+    awful.key({ "Control","Shift",},"s", function () awful.spawn.with_shell("~/Documents/global/bash-script/prompt 'are you sure?' '/usr/sbin/shutdown -h now'") end,
               {description = "quit awesome", group = "awesome"}),
 
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
@@ -330,17 +330,15 @@ globalkeys = gears.table.join(
               {description = "nautilus", group = "applications"}),
      awful.key({ "Control", "Shift"   }, "s", function () awful.util.spawn("subl") end,
               {description = "sublime", group = "applications"}),
-     awful.key({ "Control", "Mod1"   }, "s", function () awful.spawn.with_shell("python3 /home/l/Documents/global/web/anime/animekisa.py -e") end,
-              {description = "anime streaming", group = "shell"}),
-     awful.key({ "Control", "Mod1"   }, "d", function () awful.spawn.with_shell("python3 /home/l/Documents/global/web/anime/animekisa.py -p -e -d") end,
-              {description = "anime download", group = "shell"}),
+     awful.key({ "Control", "Shift"   }, "a", function () awful.spawn.with_shell("python3 /home/username/Documents/global/web/anime/animekisa.py") end,
+              {description = "anime", group = "shell"}),
      awful.key({ "Control", "Mod1"   }, "z", function () awful.spawn.with_shell("~/Documents/global/bash-script/auto-fill") end,
               {description = "word autofill", group = "shell"}),
      awful.key({ "Control", "Mod1"   }, "v", function () awful.spawn.with_shell("~/Documents/global/bash-script/volume-change") end,
               {description = "volume-change", group = "shell"}),
      awful.key({ "Control", "Mod1"   }, "m", function () awful.spawn.with_shell("dmenu_run") end,
               {description = "dmenu", group = "shell"}),
-     awful.key({ "Control", "Mod1"   }, "a", function () awful.spawn.with_shell("rofi -show drun") end,
+     awful.key({ "Control", "Shift"   }, "x", function () awful.spawn.with_shell("rofi -show drun") end,
               {description = "rofi", group = "shell"}),
      awful.key({ "Control", "Mod1"   }, "t", function () awful.spawn.with_shell("date +%R | dmenu") end,
               {description = "show time", group = "shell"}),
@@ -649,6 +647,10 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- }}}
 
 awful.util.spawn("compton")
+
+-- swap Caps-Lock and Escape
+awful.spawn.with_shell("setxkbmap -option caps:swapescape")
+
 --client.connect_signal("focus", function(c) c.border_color = "ff9a00" end)
 --awful.spawn.with_shell("picom --experimental-backends --backend glx")
 --awful.spawn.with_shell("feh --bg-fill ~/Pictures/web_images/img_06.png")
