@@ -20,11 +20,11 @@ theme.bg_minimize   = "#444444"
 theme.bg_systray    = theme.bg_normal
 
 theme.fg_normal     = "#aaaaaa"
-theme.fg_focus      = "#ffffff"
-theme.fg_urgent     = "#ffffff"
-theme.fg_minimize   = "#ffffff"
+theme.fg_focus      = "#9bf542"
+theme.fg_urgent     = "#ff0000"
+theme.fg_minimize   = "#444444"
 
-theme.useless_gap   = dpi(16)
+theme.useless_gap   = dpi(8)
 theme.border_width  = dpi(2)
 theme.border_normal = "#203f6f"
 theme.border_focus  = "#ff7400"
@@ -41,7 +41,6 @@ theme.border_marked = "#5a0000"
 -- prompt_[fg|bg|fg_cursor|bg_cursor|font]
 -- hotkeys_[bg|fg|border_width|border_color|shape|opacity|modifiers_fg|label_bg|label_fg|group_margin|font|description_font]
 -- Example:
---theme.taglist_bg_focus = "#ff0000"
 
 -- Generate taglist squares:
 local taglist_square_size = dpi(4)
@@ -74,32 +73,27 @@ theme.menu_width  = dpi(100)
 --[[
 theme.titlebar_close_button_normal = themes_path.."default/titlebar/close_normal.png"
 theme.titlebar_close_button_focus  = themes_path.."default/titlebar/close_focus.png"
-
 theme.titlebar_minimize_button_normal = themes_path.."default/titlebar/minimize_normal.png"
 theme.titlebar_minimize_button_focus  = themes_path.."default/titlebar/minimize_focus.png"
-
 theme.titlebar_ontop_button_normal_inactive = themes_path.."default/titlebar/ontop_normal_inactive.png"
 theme.titlebar_ontop_button_focus_inactive  = themes_path.."default/titlebar/ontop_focus_inactive.png"
 theme.titlebar_ontop_button_normal_active = themes_path.."default/titlebar/ontop_normal_active.png"
 theme.titlebar_ontop_button_focus_active  = themes_path.."default/titlebar/ontop_focus_active.png"
-
 theme.titlebar_sticky_button_normal_inactive = themes_path.."default/titlebar/sticky_normal_inactive.png"
 theme.titlebar_sticky_button_focus_inactive  = themes_path.."default/titlebar/sticky_focus_inactive.png"
 theme.titlebar_sticky_button_normal_active = themes_path.."default/titlebar/sticky_normal_active.png"
 theme.titlebar_sticky_button_focus_active  = themes_path.."default/titlebar/sticky_focus_active.png"
-
 theme.titlebar_floating_button_normal_inactive = themes_path.."default/titlebar/floating_normal_inactive.png"
 theme.titlebar_floating_button_focus_inactive  = themes_path.."default/titlebar/floating_focus_inactive.png"
 theme.titlebar_floating_button_normal_active = themes_path.."default/titlebar/floating_normal_active.png"
 theme.titlebar_floating_button_focus_active  = themes_path.."default/titlebar/floating_focus_active.png"
-
 theme.titlebar_maximized_button_normal_inactive = themes_path.."default/titlebar/maximized_normal_inactive.png"
 theme.titlebar_maximized_button_focus_inactive  = themes_path.."default/titlebar/maximized_focus_inactive.png"
 theme.titlebar_maximized_button_normal_active = themes_path.."default/titlebar/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_active  = themes_path.."default/titlebar/maximized_focus_active.png"
 ]]--
 
-theme.wallpaper = "/home/amos/Pictures/background/adwaita-day.jpg"
+theme.wallpaper = "~/.config/awesome/wallpaper/img_11.jpg"
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = themes_path.."default/layouts/fairhw.png"
@@ -126,8 +120,6 @@ theme.awesome_icon = theme_assets.awesome_icon(
 
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
-theme.icon_theme = nil
+-- theme.icon_theme = nil
 
 return theme
-
--- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80
