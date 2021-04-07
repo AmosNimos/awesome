@@ -55,7 +55,8 @@ end
 beautiful.init(gears.filesystem.get_configuration_dir() .. "theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "xfce4-terminal"
+-- xfce4-terminal
+terminal = "gnome-terminal"
 editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -303,7 +304,7 @@ globalkeys = gears.table.join(
               {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
-    awful.key({ "Control","Shift",},"s", function () awful.spawn.with_shell("~/Documents/global/bash-script/prompt 'are you sure?' '/usr/sbin/shutdown -h now'") end,
+    awful.key({ "Control","Shift",},"s", function () awful.spawn.with_shell("~/Documents/bash-script/prompt 'are you sure?' '/usr/sbin/shutdown -h now'") end,
               {description = "quit awesome", group = "awesome"}),
 
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
@@ -324,24 +325,35 @@ globalkeys = gears.table.join(
               {description = "select previous", group = "layout"}),
 
     --my keys
-     awful.key({ "Control", "Shift"   }, "w", function () awful.util.spawn("firefox") end,
+     awful.key({ "Control", "Shift"   }, "w", function () awful.util.spawn("brave") end,
               {description = "firefox", group = "applications"}),
      awful.key({ "Control", "Shift"   }, "f", function () awful.util.spawn("nautilus") end,
               {description = "nautilus", group = "applications"}),
-     awful.key({ "Control", "Shift"   }, "s", function () awful.util.spawn("subl") end,
+     awful.key({ modkey, "Control"    },"s", function () awful.util.spawn("subl") end,
               {description = "sublime", group = "applications"}),
-     awful.key({ "Control", "Shift"   }, "a", function () awful.spawn.with_shell("python3 /home/username/Documents/global/web/anime/animekisa.py") end,
+     awful.key({ "Control", "Shift"   }, "a", function () awful.spawn.with_shell("python3 ~/Documents/web/anime/anime.py") end,
               {description = "anime", group = "shell"}),
-     awful.key({ "Control", "Mod1"   }, "z", function () awful.spawn.with_shell("~/Documents/global/bash-script/auto-fill") end,
+     awful.key({ "Control", "Shift"   }, "t", function () awful.spawn.with_shell("python3 ~/Documents/web/tpb_dl/tpb_dl.py") end,
+              {description = "tpb", group = "shell"}),
+
+     awful.key({ "Control", "Mod1"   }, "z", function () awful.spawn.with_shell("python3 ~/Documents/python/lazy_menu/lazy_menu.py") end,
               {description = "word autofill", group = "shell"}),
-     awful.key({ "Control", "Mod1"   }, "v", function () awful.spawn.with_shell("~/Documents/global/bash-script/volume-change") end,
+     awful.key({ "Control", "Mod1"   }, "v", function () awful.spawn.with_shell("~/Documents/bash-script/volume-change") end,
               {description = "volume-change", group = "shell"}),
      awful.key({ "Control", "Mod1"   }, "m", function () awful.spawn.with_shell("dmenu_run") end,
               {description = "dmenu", group = "shell"}),
      awful.key({ "Control", "Shift"   }, "x", function () awful.spawn.with_shell("rofi -show drun") end,
               {description = "rofi", group = "shell"}),
-     awful.key({ "Control", "Mod1"   }, "t", function () awful.spawn.with_shell("date +%R | dmenu") end,
-              {description = "show time", group = "shell"}),
+    awful.key({ "Control", "Shift"   }, "d", function () awful.spawn.with_shell("python3 ~/Documents/python/dcdp/dcdp.py") end,
+              {description = "dcdp", group = "shell"}),
+    awful.key({ "Control", "Shift"   }, "b", function () awful.spawn.with_shell("~/Documents/blender/blender-2.92.0/blender") end,
+              {description = "blender", group = "applications"}),
+    awful.key({ "Control", "Shift"   }, "e", function () awful.spawn.with_shell("ibus emoji") end,
+              {description = "emoji", group = "applications"}),
+    --awful.key({ "Control", "Shift"   }, "y", function () awful.spawn.with_shell("python3 ~/Documents/web/youtube/yt-link.py") end,
+    --          {description = "youtube", group = "shell"}),
+     --awful.key({ "Control", "Mod1"   }, "t", function () awful.spawn.with_shell("date +%R | dmenu") end,
+              --{description = "show time", group = "shell"}),
 
      
 
@@ -595,6 +607,8 @@ client.connect_signal("manage", function (c)
     end
 end)
 
+
+--TITLE BAR
 --[[
 -- Add a titlebar if titlebars_enabled is set to true in the rules.
 client.connect_signal("request::titlebars", function(c)
@@ -650,6 +664,8 @@ awful.util.spawn("compton")
 
 -- swap Caps-Lock and Escape
 awful.spawn.with_shell("setxkbmap -option caps:swapescape")
+--awful.spawn.with_shell("~/Documents/bash-script/covid/covid_update")
+-- display conky clock
 
 --client.connect_signal("focus", function(c) c.border_color = "ff9a00" end)
 --awful.spawn.with_shell("picom --experimental-backends --backend glx")
