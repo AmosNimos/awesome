@@ -272,6 +272,7 @@ globalkeys = gears.table.join(
         end,
         {description = "focus previous by index", group = "client"}
     ),
+
     --[[
     awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
               {description = "show main menu", group = "awesome"}),
@@ -298,13 +299,13 @@ globalkeys = gears.table.join(
         {description = "go back", group = "client"}),
 
     -- Standard program
-    awful.key({ "Control", "Shift"}, "z", function () awful.spawn(terminal) end,
+    awful.key({ "Control", "Shift" }, "z", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
     awful.key({ modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
-    awful.key({ "Control","Shift",},"s", function () awful.spawn.with_shell("~/Documents/bash-script/prompt 'are you sure?' '/usr/sbin/shutdown -h now'") end,
+    awful.key({ "Control","Shift",}, "s", function () awful.spawn.with_shell("~/Documents/bash-script/prompt 'are you sure?' '/usr/sbin/shutdown -h now'") end,
               {description = "quit awesome", group = "awesome"}),
 
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
@@ -328,7 +329,7 @@ globalkeys = gears.table.join(
      awful.key({ "Control", "Shift"   }, "w", function () awful.util.spawn("brave") end,
               {description = "web", group = "applications"}),
 
-     awful.key({ "Control", "Shift"   }, "a", function () awful.spawn.with_shell("~/Documents/files/deb/Cool-Retro-Term-1.1.1-x86_64.AppImage") end,
+     awful.key({ "Control", "Shift"   }, "o", function () awful.spawn.with_shell("~/Documents/files/deb/Cool-Retro-Term-1.1.1-x86_64.AppImage") end,
               {description = "classic_terminal", group = "applications"}),
      
      awful.key({ "Control", "Shift"   }, "1", function () awful.spawn.with_shell("~/Documents/git/private/repos/python/mousekey/mk3.pyw") end,
@@ -417,7 +418,7 @@ clientkeys = gears.table.join(
             c:raise()
         end,
         {description = "toggle fullscreen", group = "client"}),
-    awful.key({ "Control", "Shift"   }, "q",      function (c) c:kill()                         end,
+    awful.key({ "Control", "Shift"}, "q",      function (c) c:kill()                         end,
               {description = "close", group = "client"}),
 
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ,
