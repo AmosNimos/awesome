@@ -8,6 +8,7 @@ pcall(require, "luarocks.loader")
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
+local rotate = require('screenrotation')
 require("awful.autofocus")
 -- Widget and layout library
 local wibox = require("wibox")
@@ -97,6 +98,20 @@ myawesomemenu = {
    { "restart", awesome.restart },
    { "quit", function() awesome.quit() end },
 }
+
+-- rotate screen\
+--[[
+globalkeys = gears.table.join(
+  awful.key({ modkey, "Alt" }, "k", function() rotate("normal") end,
+    {description = "Normal tag rotation", group = "tag"}),
+  awful.key({ modkey, "Alt" }, "j", function() rotate("inverted") end,
+    {description = "Inverted tag rotation", group = "tag"}),
+  awful.key({ modkey, "Alt" }, "h", function() rotate("left") end,
+    {description = "Counter-clockwise tag rotation", group = "tag"}),
+  awful.key({ modkey, "Alt" }, "l", function() rotate("right") end,
+    {description = "Clockwise tag rotation", group = "tag"})
+)
+--]]
 
 local menu_awesome = { "awesome", myawesomemenu, beautiful.awesome_icon }
 local menu_terminal = { "open terminal", terminal }
@@ -326,27 +341,37 @@ globalkeys = gears.table.join(
               {description = "select previous", group = "layout"}),
 
     --my keys
-     awful.key({ "Control", "Shift"   }, "w", function () awful.util.spawn("brave") end,
+     awful.key({ "Control", "Shift"   }, "w", function () awful.util.spawn("brave") end, --awful.util.spawn brave
               {description = "web", group = "applications"}),
+
+  awful.key({ modkey, "Control" }, "k", function() rotate("normal") end,
+    {description = "Normal tag rotation", group = "tag"}),
+  awful.key({ modkey, "Control" }, "j", function() rotate("inverted") end,
+    {description = "Inverted tag rotation", group = "tag"}),
+  awful.key({ modkey, "Control" }, "h", function() rotate("left") end,
+    {description = "Counter-clockwise tag rotation", group = "tag"}),
+  awful.key({ modkey, "Control" }, "l", function() rotate("right") end,
+    {description = "Clockwise tag rotation", group = "tag"}),
+
+
+     awful.key({ "Control", "Shift"   }, "r", function () awful.spawn.with_shell("xsel | espeak") end,
+              {description = "read selection", group = "bash"}),
+
+     awful.key({ "Control", "Shift"   }, "l", function () awful.spawn.with_shell("xsel | espeak -vfr") end,
+              {description = "lecture fr", group = "bash"}),
+
+
 
      awful.key({ "Control", "Shift"   }, "o", function () awful.spawn.with_shell("~/Documents/files/deb/Cool-Retro-Term-1.1.1-x86_64.AppImage") end,
               {description = "classic_terminal", group = "applications"}),
-     
-     awful.key({ "Control", "Shift"   }, "1", function () awful.spawn.with_shell("~/Documents/git/private/repos/python/mousekey/mk3.pyw") end,
-              {description = "keymouse", group = "applications"}),
-     awful.key({ "Control", "Shift"   }, "8", function () awful.spawn.with_shell("~/Documents/pico8/pico-8_0.2.2c_amd64/pico-8/pico8") end,
+     awful.key({ "Control", "Shift"   }, "p", function () awful.spawn.with_shell("~/Documents/pico8/pico-8_0.2.2c_amd64/pico-8/pico8") end,
               {description = "pico-8", group = "applications"}),
      awful.key({ "Control", "Shift"   }, "d", function () awful.util.spawn("nautilus") end,
               {description = "nautilus", group = "applications"}),
      awful.key({ modkey, "Control"    },"s", function () awful.util.spawn("subl") end,
               {description = "sublime", group = "applications"}),
-
-     --awful.key({ "Control", "Shift"   }, "a", function () awful.spawn.with_shell("python3 ~/Documents/web/anime/anime.py") end,
-     --         {description = "anime", group = "shell"}),
-
      awful.key({ "Control", "Shift"   }, "t", function () awful.spawn.with_shell("python3 ~/Documents/web/tpb_dl/tpb_dl.py") end,
               {description = "tpb", group = "shell"}),
-
      awful.key({ "Control", "Mod1"   }, "z", function () awful.spawn.with_shell("python3 ~/Documents/python/lazy_menu/lazy_menu.py") end,
               {description = "word autofill", group = "shell"}),
      awful.key({ "Control", "Mod1"   }, "v", function () awful.spawn.with_shell("~/Documents/bash-script/volume-change") end,
@@ -355,28 +380,13 @@ globalkeys = gears.table.join(
               {description = "dmenu", group = "shell"}),
      awful.key({ "Control", "Shift"   }, "x", function () awful.spawn.with_shell("rofi -show drun") end,
               {description = "rofi", group = "shell"}),
-    --awful.key({ "Control", "Shift"   }, "d", function () awful.spawn.with_shell("python3 ~/Documents/python/dcdp/dcdp.py") end,
-    --          {description = "dcdp", group = "shell"}),
     awful.key({ "Control", "Shift"   }, "b", function () awful.spawn.with_shell("~/Documents/blender/blender-2.92.0/blender") end,
               {description = "blender", group = "applications"}),
     awful.key({ "Control", "Shift"   }, "e", function () awful.spawn.with_shell("ibus emoji") end,
               {description = "emoji", group = "applications"}),
-    awful.key({ "Control", "Shift"   }, "p", function () awful.spawn.with_shell("~/Documents/files/deb/processing-3.5.4/processing") end,
-              {description = "emoji", group = "applications"}),
 
-
-
-
-    --keyboard
-    --awful.key({ "Control", "Shift"   }, "n", function () awful.spawn.with_shell("~/Documents/bash-script/arrow_mode.sh") end,
-    --          {description = "swap keyboard mode", group = "keyboard"}),
-
-    awful.key({ "Control", "Shift"   }, "1", function () awful.spawn.with_shell("setxkbmap -option caps:swapescape") end,
-              {description = "make sure escape and cap are swaped", group = "keyboard"}),
-    --awful.key({ "Control", "Shift"   }, "y", function () awful.spawn.with_shell("python3 ~/Documents/web/youtube/yt-link.py") end,
-    --          {description = "youtube", group = "shell"}),
-     --awful.key({ "Control", "Mod1"   }, "t", function () awful.spawn.with_shell("date +%R | dmenu") end,
-              --{description = "show time", group = "shell"}),
+    awful.key({ "Control", "Shift"   }, "1", function () awful.spawn.with_shell("setxkbmap -option caps:swapescape & xmodmap -e 'keycode 62 = 0x007e'") end,
+              {description = "keyswap", group = "keyboard"}),
 
      
 
@@ -610,8 +620,8 @@ awful.rules.rules = {
     },
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
-    -- { rule = { class = "Firefox" },
-    --   properties = { screen = 1, tag = "2" } },
+    { rule = { class = "Firefox" },
+      properties = { screen = 1, tag = "2" } },
 }
 -- }}}
 
@@ -684,7 +694,7 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- }}}
 
 
---awful.util.spawn("compton")
+awful.util.spawn("compton")
 
 -- swap Caps-Lock and Escape
 awful.spawn.with_shell("setxkbmap -option caps:swapescape")
