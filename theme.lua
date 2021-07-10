@@ -30,6 +30,8 @@ theme.border_normal = "#203f6f"
 theme.border_focus  = "#ff7400"
 theme.border_marked = "#5a0000"
 
+theme.wallpaper = "~/.config/awesome/wallpaper/w04.png"
+
 -- There are other variable sets
 -- overriding the default one when
 -- defined, the sets are:
@@ -92,8 +94,6 @@ theme.titlebar_maximized_button_focus_inactive  = themes_path.."default/titlebar
 theme.titlebar_maximized_button_normal_active = themes_path.."default/titlebar/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_active  = themes_path.."default/titlebar/maximized_focus_active.png"
 ]]--
-
-theme.wallpaper = "~/.config/awesome/wallpaper/img_11.jpg"
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = themes_path.."default/layouts/fairhw.png"
