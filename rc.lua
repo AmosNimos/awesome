@@ -8,7 +8,7 @@ pcall(require, "luarocks.loader")
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
-local rotate = require('screenrotation')
+-- local rotate = require('screenrotation')
 require("awful.autofocus")
 -- Widget and layout library
 local wibox = require("wibox")
@@ -320,8 +320,14 @@ globalkeys = gears.table.join(
               {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
-    awful.key({ "Control","Shift",}, "s", function () awful.spawn.with_shell("~/Documents/bash-script/prompt 'are you sure?' '/usr/sbin/shutdown -h now'") end,
+
+    --Lazy way
+    awful.key({ "Control","Shift",}, "s", function () awful.spawn.with_shell("/usr/sbin/shutdown -h now") end,
               {description = "quit awesome", group = "awesome"}),
+            
+    --Luck smith way
+    --awful.key({ "Control","Shift",}, "s", function () awful.spawn.with_shell("~/Documents/bash-script/prompt 'are you sure?' '/usr/sbin/shutdown -h now'") end,
+    --          {description = "quit awesome", group = "awesome"}),
 
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
               {description = "increase master width factor", group = "layout"}),
@@ -341,9 +347,11 @@ globalkeys = gears.table.join(
               {description = "select previous", group = "layout"}),
 
     --my keys
-     awful.key({ "Control", "Shift"   }, "w", function () awful.util.spawn("brave") end, --awful.util.spawn brave
+    -- the name of your browser is in your /bin file
+     awful.key({ "Control", "Shift"   }, "w", function () awful.util.spawn("brave-browser") end, --awful.util.spawn brave
               {description = "web", group = "applications"}),
 
+  --[[
   awful.key({ modkey, "Control" }, "k", function() rotate("normal") end,
     {description = "Normal tag rotation", group = "tag"}),
   awful.key({ modkey, "Control" }, "j", function() rotate("inverted") end,
@@ -352,7 +360,7 @@ globalkeys = gears.table.join(
     {description = "Counter-clockwise tag rotation", group = "tag"}),
   awful.key({ modkey, "Control" }, "l", function() rotate("right") end,
     {description = "Clockwise tag rotation", group = "tag"}),
-
+    ]]--
 
      awful.key({ "Control", "Shift"   }, "r", function () awful.spawn.with_shell("xsel | espeak") end,
               {description = "read selection", group = "bash"}),
