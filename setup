@@ -1,4 +1,0 @@
-setup:
-sudo apt install compton # graphical compositor
-sudo apt install xfce4-terminal #terminal with trensparency
-sudo apt install lxappearance #change theme
