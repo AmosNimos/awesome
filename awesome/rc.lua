@@ -251,8 +251,6 @@ root.buttons(gears.table.join(
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
-    awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
-              {description="show help", group="awesome"}),
               
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
               {description = "view previous", group = "tag"}),
@@ -355,6 +353,8 @@ globalkeys = gears.table.join(
               {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
+    awful.key({ modkey,           }, "h",      hotkeys_popup.show_help,
+              {description="show help", group="awesome"}),
               
     -- custom shortcuts           
     awful.key({ modkey }, "w", function () awful.spawn.with_shell("sensible-browser") end,
@@ -371,6 +371,10 @@ globalkeys = gears.table.join(
 
     awful.key({ modkey }, "y", function () awful.spawn.with_shell("ibus emoji") end,
               {description = "emoji", group = "applications"}),
+         
+    --Luck smith way
+    awful.key({ modkey }, "s", function () awful.spawn.with_shell("~/.config/awesome/prompt.sh 'Are you sure?' '/usr/sbin/shutdown -h now'") end,
+              {description = "quit awesome", group = "awesome"}),
 
     awful.key({ modkey }, "f", function () awful.util.spawn("xdg-open .") end,
               {description = "nautilus", group = "File Manager"})
