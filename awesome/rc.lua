@@ -302,12 +302,6 @@ globalkeys = gears.table.join(
         end,
         {description = "go back", group = "client"}),
 
-    -- Standard program
-    awful.key({ modkey, "Control" }, "r", awesome.restart,
-              {description = "reload awesome", group = "awesome"}),
-    awful.key({ modkey, "Shift"   }, "q", awesome.quit,
-              {description = "quit awesome", group = "awesome"}),
-
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
               {description = "increase master width factor", group = "layout"}),
     awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)          end,
@@ -356,24 +350,30 @@ globalkeys = gears.table.join(
     awful.key({ modkey }, "p", function() menubar.show() end,
               {description = "show the menubar", group = "launcher"}),
               
-    -- custom shortcuts
-    awful.key({ "Control", modkey    }, "z", function () awful.spawn(terminal) end,
-              {description = "open a terminal", group = "launcher"}),
+    -- Standard program
+    awful.key({ modkey, "Control" }, "r", awesome.restart,
+              {description = "reload awesome", group = "awesome"}),
+    awful.key({ modkey, "Shift"   }, "q", awesome.quit,
+              {description = "quit awesome", group = "awesome"}),
               
-    awful.key({ "Control", "Shift"   }, "w", function () awful.spawn.with_shell("sensible-browser") end,
-              {description = "web", group = "Default Browser"}), 
+    -- custom shortcuts           
+    awful.key({ modkey }, "w", function () awful.spawn.with_shell("sensible-browser") end,
+              {description = "web", group = "Default Browser"}),  
               
-    awful.key({ "Control", "Shift"   }, "d", function () awful.util.spawn("xdg-open .") end,
-              {description = "nautilus", group = "File Manager"}),    
+    awful.key({ modkey }, "e", function () awful.spawn.with_shell("rofi -show drun") end,
+              {description = "rofi", group = "shell"}),  
           
-    awful.key({ "Control", "Shift"   }, "r", function () awful.spawn.with_shell("xsel | espeak") end,
+    awful.key({ modkey }, "r", function () awful.spawn.with_shell("xsel | espeak") end,
               {description = "read selection", group = "Read Selection"}),
               
-    awful.key({ "Control", modkey    }, "x", function () awful.spawn.with_shell("rofi -show drun") end,
-              {description = "rofi", group = "shell"}),
+    awful.key({ modkey }, "t", function () awful.spawn(terminal) end,
+              {description = "open a terminal", group = "launcher"}),
 
-    awful.key({ "Control", "Shift"   }, "e", function () awful.spawn.with_shell("ibus emoji") end,
-              {description = "emoji", group = "applications"})
+    awful.key({ modkey }, "y", function () awful.spawn.with_shell("ibus emoji") end,
+              {description = "emoji", group = "applications"}),
+
+    awful.key({ modkey }, "f", function () awful.util.spawn("xdg-open .") end,
+              {description = "nautilus", group = "File Manager"})
 )
 
 clientkeys = gears.table.join(
@@ -383,8 +383,11 @@ clientkeys = gears.table.join(
             c:raise()
         end,
         {description = "toggle fullscreen", group = "client"}),
-    awful.key({ "Control", "Shift"}, "q",      function (c) c:kill()                         end,
+    
+    -- Close client
+    awful.key({ modkey }, "q",      function (c) c:kill()                         end,
               {description = "close", group = "client"}),
+              
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ,
               {description = "toggle floating", group = "client"}),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
@@ -618,6 +621,9 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+
+--Terminal trensparency 
+awful.util.spawn("compton")
 
 -- swap Caps-Lock and Escape
 awful.spawn.with_shell("setxkbmap -option caps:swapescape")
