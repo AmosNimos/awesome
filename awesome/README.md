@@ -15,3 +15,5 @@ The prompt.sh is a shell script that is used in the rc.lua as a shortcut to prom
 ~~~
 chmod +x prompt.sh
 ~~~
+
+Press super-i for the shortcut information.
