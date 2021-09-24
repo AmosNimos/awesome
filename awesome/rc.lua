@@ -353,7 +353,7 @@ globalkeys = gears.table.join(
               {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
-    awful.key({ modkey,           }, "h",      hotkeys_popup.show_help,
+    awful.key({ modkey,           }, "i",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
               
     -- custom shortcuts           
