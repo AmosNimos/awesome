@@ -17,3 +17,17 @@ chmod +x prompt.sh
 ~~~
 
 Press super-i for the shortcut information.
+
+#### cava (audio visualizer) gradient them config:
+~~~
+# Gradient mode, only hex defined colors are supported, background must also be defined in hex
+# or remain commented out. 1 = on, 0 = off. Warning: for certain terminal emulators cava will
+# not able to restore color definitions on exit, simply restart your terminal to restore colors.
+ gradient = 1
+ gradient_count = 5
+ gradient_color_1 = '#1AFFB2'
+ gradient_color_2 = '#4A8AAD'
+ gradient_color_3 = '#764BA0'
+ gradient_color_4 = '#A75993'
+ gradient_color_5 = '#FF9A8E'
+~~~
