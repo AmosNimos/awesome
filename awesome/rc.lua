@@ -559,6 +559,10 @@ awful.rules.rules = {
     { rule_any = {type = { "normal", "dialog" }
       }, properties = { titlebars_enabled = false }
     },
+    
+    -- Set firefox floating and maximized propriety to false. 
+    { rule = { class = "Firefox" },
+  	properties = { opacity = 1, maximized = false, floating = false } },
 }
 -- }}}
 
