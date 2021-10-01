@@ -299,7 +299,8 @@ globalkeys = gears.table.join(
             end
         end,
         {description = "go back", group = "client"}),
-
+	
+	-- client resize width (i think)
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
               {description = "increase master width factor", group = "layout"}),
     awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)          end,
@@ -329,8 +330,8 @@ globalkeys = gears.table.join(
               end,
               {description = "restore minimized", group = "client"}),
 
-    -- Prompt
-    awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end,
+    -- Prompt (to be tested)
+    awful.key({ modkey },            "g",     function () awful.screen.focused().mypromptbox:run() end,
               {description = "run prompt", group = "launcher"}),
 
     awful.key({ modkey }, "x",
@@ -361,27 +362,29 @@ globalkeys = gears.table.join(
               {description = "web", group = "Default Browser"}),  
               
     awful.key({ modkey }, "e", function () awful.spawn.with_shell("rofi -show drun") end,
-              {description = "rofi", group = "shell"}),  
+              {description = "execute(rofi)", group = "shell"}),  
           
     awful.key({ modkey }, "r", function () awful.spawn.with_shell("xsel | espeak") end,
               {description = "read selection", group = "Read Selection"}),
               
     awful.key({ modkey }, "t", function () awful.spawn(terminal) end,
-              {description = "open a terminal", group = "launcher"}),
+              {description = "terminal", group = "launcher"}),
 
     awful.key({ modkey }, "y", function () awful.spawn.with_shell("ibus emoji") end,
-              {description = "emoji", group = "applications"}),
+              {description = "symbol & emoji", group = "applications"}),
          
-    --Luck smith way
+    awful.key({ modkey }, "a", function () awful.spawn.with_shell("~/.config/awesome/gain.sh") end,
+              {description = "audio gain", group = "awesome"}),
+	
     awful.key({ modkey }, "s", function () awful.spawn.with_shell("~/.config/awesome/prompt.sh 'Are you sure?' '/usr/sbin/shutdown -h now'") end,
-              {description = "quit awesome", group = "awesome"}),
+              {description = "shutdown prompt", group = "awesome"}),
 
     awful.key({ modkey }, "f", function () awful.util.spawn("xdg-open .") end,
-              {description = "nautilus", group = "File Manager"})
+              {description = "file manager (nautilus)", group = "File Manager"})
 )
 
 clientkeys = gears.table.join(
-    awful.key({ modkey,           }, "f",
+    awful.key({ modkey, "Shift"   }, "f",
         function (c)
             c.fullscreen = not c.fullscreen
             c:raise()
