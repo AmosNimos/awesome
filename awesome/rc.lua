@@ -633,6 +633,8 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
+--- At lunch
+
 --Terminal trensparency 
 awful.util.spawn("compton")
 
@@ -641,3 +643,15 @@ awful.spawn.with_shell("setxkbmap -option caps:swapescape")
 
 -- swap right shifr with tild (for 60% english keyboard)
 awful.spawn.with_shell("xmodmap -e 'keycode 62 = 0x007e'")
+
+-- allow copy from gedit to permanent clipboard
+awful.spawn.with_shell("parcellite") 
+
+--- Intro
+
+-- Start terminal emulator
+awful.spawn.with_shell("~/Documents/appimage/eDEX-UI.AppImage")
+-- Say time
+awful.spawn.with_shell("sleep 15 && echo 'Welcome back sir! Its '$(date +%l:%M%p)', all system are fully operational.' | festival --tts")
+-- Play Music (acdc)
+awful.spawn.with_shell("sleep 17 && moc -l '/home/amos/Music/yt-mp3/acdc/bnb.mp3'"
