@@ -370,9 +370,12 @@ globalkeys = gears.table.join(
     awful.key({ modkey }, "t", function () awful.spawn(terminal) end,
               {description = "terminal", group = "launcher"}),
 
-    awful.key({ modkey }, "y", function () awful.spawn.with_shell("ibus emoji") end,
+    awful.key({ modkey, "Shift"   }, "y", function () awful.spawn.with_shell("ibus emoji") end,
               {description = "symbol & emoji", group = "applications"}),
-         
+
+    awful.key({ modkey}, "y", function () awful.spawn.with_shell("~/Documents/shell/yt.sh -g") end,
+              {description = "Youtube", group = "shell"}),
+                  
     awful.key({ modkey }, "a", function () awful.spawn.with_shell("~/.config/awesome/gain.sh") end,
               {description = "audio gain", group = "awesome"}),
 	
@@ -401,7 +404,7 @@ clientkeys = gears.table.join(
               {description = "move to master", group = "client"}),
     awful.key({ modkey,           }, "o",      function (c) c:move_to_screen()               end,
               {description = "move to screen", group = "client"}),
-    awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
+    awful.key({ modkey, "Control" }, "t",      function (c) c.ontop = not c.ontop            end,
               {description = "toggle keep on top", group = "client"}),
     awful.key({ modkey,           }, "n",
         function (c)
@@ -650,8 +653,7 @@ awful.spawn.with_shell("parcellite")
 --- Intro
 
 -- Start terminal emulator
-awful.spawn.with_shell("~/Documents/appimage/eDEX-UI.AppImage")
--- Say time
-awful.spawn.with_shell("sleep 15 && echo 'Welcome back sir! Its '$(date +%l:%M%p)', all system are fully operational.' | festival --tts")
--- Play Music (acdc)
-awful.spawn.with_shell("sleep 17 && moc -l '/home/amos/Music/yt-mp3/acdc/bnb.mp3'"
+-- awful.spawn.with_shell("~/Documents/appimage/eDEX-UI.AppImage")
+-- Say time & play music
+-- awful.spawn.with_shell("sleep 13 && echo 'Welcome back sir! Its '$(date +%l:%M%p)', all system are fully operational.' | festival --tts && mpv '/home/amos/Music/yt-mp3/acdc/bnb.mp3'")
+-- awful.spawn.with_shell("sleep 13 && echo 'Welcome back sir! Its '$(date +%l:%M%p)', all system are fully operational.' | festival --tts && mpv --volume=50 '/home/amos/Music/open_music/bensound/bensound-highoctane.mp3'")
